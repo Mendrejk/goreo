@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Westwind.AspNetCore.LiveReload;
 
 namespace goreo
 {
@@ -29,6 +30,8 @@ namespace goreo
             services.AddDbContext<postgresContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("goreoDB"))
             );
+
+            services.AddLiveReload();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +47,8 @@ namespace goreo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseLiveReload();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
