@@ -22,6 +22,7 @@
 
     <ItemGroup>
       <Folder Include="Pages\Booklets" />
+      <Folder Include="Pages\Users" />
     </ItemGroup>
 
 </Project>

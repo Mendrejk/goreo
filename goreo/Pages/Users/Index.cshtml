@@ -1,0 +1,97 @@
+@page
+@model goreo.Pages.Users.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].ProfileImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].CityOfResidence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].IsLeader)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].LeaderIdNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].IsAdmin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Booklet)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.User) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfileImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityOfResidence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLeader)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaderIdNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booklet.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
