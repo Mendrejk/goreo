@@ -27,7 +27,7 @@ namespace goreo
             services.AddRazorPages();
 
             services.AddDbContext<postgresContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("goreoDB"))
+                options.UseNpgsql(Configuration.GetConnectionString("goreoDB"))
             );
         }
 
