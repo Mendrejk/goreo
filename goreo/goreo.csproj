@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <Folder Include="Pages\Booklets" />
+      <Folder Include="wwwroot\profilePictures" />
     </ItemGroup>
 
     <ItemGroup>

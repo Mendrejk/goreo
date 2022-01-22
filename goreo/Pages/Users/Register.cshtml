@@ -16,52 +16,52 @@
                 <div class="logo-big text-center">
                     <img src="~/photos/Group 1.png" alt="logo"/>
                 </div>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-row">
                         <div class="col">
-                            <input asp-for="Registrant.Email" type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Email"/>
-                            <span asp-validation-for="Registrant.Email" class="text-danger"></span>
+                            <input asp-for="Registrant.User.Email" type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Email"/>
+                            <span asp-validation-for="Registrant.User.Email" class="text-danger"></span>
                         </div>
                         <div class="col">
-                            <input asp-for="Registrant.Username" type="text" class="form-control" id="input-nick" aria-describedby="emailHelp" placeholder="Nick"/>
-                            <span asp-validation-for="Registrant.Username" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col">
-                            <input asp-for="Registrant.Password" type="password" class="form-control" id="input-password" placeholder="Hasło">
-                            <span asp-validation-for="Registrant.Password" class="text-danger"></span>
-                        </div>
-                        <div class="col">
-                            <input asp-for="Registrant.FirstName" type="text" class="form-control" id="input-name" aria-describedby="emailHelp" placeholder="Imię"/>
-                            <span asp-validation-for="Registrant.FirstName" class="text-danger"></span>
+                            <input asp-for="Registrant.User.Username" type="text" class="form-control" id="input-nick" aria-describedby="emailHelp" placeholder="Nick"/>
+                            <span asp-validation-for="Registrant.User.Username" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <input asp-for="Registrant.Surname" type="text" class="form-control" id="input-surname" aria-describedby="emailHelp" placeholder="Nazwisko"/>
-                            <span asp-validation-for="Registrant.Surname" class="text-danger"></span>
+                            <input asp-for="Registrant.User.Password" type="password" class="form-control" id="input-password" placeholder="Hasło">
+                            <span asp-validation-for="Registrant.User.Password" class="text-danger"></span>
                         </div>
                         <div class="col">
-                            <input asp-for="Registrant.CityOfResidence" type="text" class="form-control" id="input-home" aria-describedby="emailHelp" placeholder="Miejscowość zamieszkania"/>
-                            <span asp-validation-for="Registrant.CityOfResidence" class="text-danger"></span>
+                            <input asp-for="Registrant.User.FirstName" type="text" class="form-control" id="input-name" aria-describedby="emailHelp" placeholder="Imię"/>
+                            <span asp-validation-for="Registrant.User.FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <input asp-for="Registrant.User.Surname" type="text" class="form-control" id="input-surname" aria-describedby="emailHelp" placeholder="Nazwisko"/>
+                            <span asp-validation-for="Registrant.User.Surname" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="Registrant.User.CityOfResidence" type="text" class="form-control" id="input-home" aria-describedby="emailHelp" placeholder="Miejscowość zamieszkania"/>
+                            <span asp-validation-for="Registrant.User.CityOfResidence" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="label-photo" for="select-photo">Zdjęcie</label>
-                        <input asp-for="Registrant.ProfileImage" type="file" class="form-control-file select-button" id="select-photo">
-                        <span asp-validation-for="Registrant.ProfileImage" class="text-danger"></span>
+                        <input asp-for="Registrant.ImageFile" type="file" accept="image/*" class="form-control-file select-button" id="select-photo">
+                        <span asp-validation-for="Registrant.ImageFile" class="text-danger"></span>
                     </div>
                     <div>
                         <div class="custom-control custom-switch register-switch">
-                            <input asp-for="Registrant.IsLeader" type="checkbox" class="custom-control-input" id="customSwitch1">
+                            <input asp-for="Registrant.User.IsLeader" type="checkbox" class="custom-control-input" id="customSwitch1">
                             <label class="custom-control-label label-check" for="customSwitch1">Czy jest przodownikiem turystyki górskiej PTTK</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Registrant.LeaderIdNo" type="text" class="form-control" id="input-number" aria-describedby="emailHelp" placeholder="Numer legitymacji"/>
-                        <span asp-validation-for="Registrant.LeaderIdNo" class="text-danger"></span>
+                        <input asp-for="Registrant.User.LeaderIdNo" type="text" class="form-control" id="input-number" aria-describedby="emailHelp" placeholder="Numer legitymacji"/>
+                        <span asp-validation-for="Registrant.User.LeaderIdNo" class="text-danger"></span>
                     </div>
                     <div class="form-group text-center">
                         <input type="submit" value="Stwórz" class="btn btn-primary button-create"/>
