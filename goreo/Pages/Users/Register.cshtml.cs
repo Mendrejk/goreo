@@ -9,18 +9,18 @@ using goreo;
 
 namespace goreo.Pages.Users
 {
-    public class CreateModel : PageModel
+    public class RegisterModel : PageModel
     {
         private readonly goreo.postgresContext _context;
 
-        public CreateModel(goreo.postgresContext context)
+        public RegisterModel(goreo.postgresContext context)
         {
             _context = context;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["BookletId"] = new SelectList(_context.Booklets, "Id", "Id");
+            ViewData["BookletId"] = new SelectList(_context.Booklets, "Id", "Id");
             return Page();
         }
 

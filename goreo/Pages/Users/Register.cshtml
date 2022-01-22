@@ -1,12 +1,12 @@
 @page
-@model goreo.Pages.Users.CreateModel
+@model goreo.Pages.Users.RegisterModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Register";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Register</h1>
 
 <h4>User</h4>
 <hr />
@@ -69,7 +69,7 @@
                 <select asp-for="User.BookletId" class ="form-control" asp-items="ViewBag.BookletId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Register" class="btn btn-primary" />
             </div>
         </form>
     </div>
