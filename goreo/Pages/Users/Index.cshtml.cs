@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using goreo;
+using Microsoft.AspNetCore.Authorization;
 
 namespace goreo.Pages.Users
 {
+    [Authorize(Policy = "MustBeAdmin")]
     public class IndexModel : PageModel
     {
         private readonly goreo.postgresContext _context;

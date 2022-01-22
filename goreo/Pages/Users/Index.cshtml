@@ -62,8 +62,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProfileImage)
+            <td class="col-sm-10">
+                <img src="@(
+                              item.ProfileImage == null
+                                  ? "~/photos/DefaultProfileImage.png"
+                                  : "~/profilePictures/" + item.ProfileImage)"
+                     asp-append-version="true" width="150px" height="150px" alt=""/>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
