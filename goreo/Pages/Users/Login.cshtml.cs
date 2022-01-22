@@ -56,9 +56,8 @@ namespace goreo.Pages.Users
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity));
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Users/Index");
         }
-
 
         [BindProperty] public LoginCredentials Credentials { get; set; }
     }
