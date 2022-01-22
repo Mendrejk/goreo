@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -63,6 +64,7 @@ namespace goreo.Pages.Users
 
     public class Registrant
     {
+        [Required]
         public User User { get; set; }
         public IFormFile ImageFile { get; set; }
     }

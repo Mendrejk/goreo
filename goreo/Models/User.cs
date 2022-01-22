@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -13,13 +14,20 @@ namespace goreo
         }
 
         public int Id { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Username { get; set; }
+        [Required]
         public string Password { get; set; }
         public string ProfileImage { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string Surname { get; set; }
+        [Required]
         public string CityOfResidence { get; set; }
+        [Required]
         public bool IsLeader { get; set; }
         public string LeaderIdNo { get; set; }
         public bool IsAdmin { get; set; }
