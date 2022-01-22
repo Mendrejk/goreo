@@ -74,3 +74,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    window.onload = function() {
+        $("#customSwitch1").change(function() {
+           $('#input-number').prop('disabled', !this.checked) 
+        });
+    };
+</script>
