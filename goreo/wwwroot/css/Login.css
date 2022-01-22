@@ -22,13 +22,14 @@
 }
 
 .col {
-    margin: 0.5rem 1.5rem;
+    margin: 0.5rem;
 }
 
 .form-control {
     border-radius: 0;
     box-shadow: inset 2px 4px 4px #cccccc;
     width: 70%;
+    margin: 0 auto;
 }
 
 .col-md-4 {
