@@ -27,5 +27,21 @@ namespace goreo
 
         public virtual Booklet Booklet { get; set; }
         public virtual ICollection<Route> Routes { get; set; }
+
+        public String DetermineRole() =>
+            (IsAdmin, IsLeader) switch
+            {
+                (true, false) =>
+                    Roles.Administrator,
+                (false, true) => Roles.Leader,
+                _ => Roles.User
+            };
+
+        public static class Roles
+        {
+            public const string Administrator = "Administrator";
+            public const string Leader = "Leader";
+            public const string User = "User";
+        }
     }
 }
