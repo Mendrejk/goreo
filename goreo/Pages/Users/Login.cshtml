@@ -6,32 +6,68 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div class="container border" style="padding: 20px">
-    <form method="post">
-        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Credentials.Username"></label>
-            </div>
-            <div class="col-5">
-                <input type="text" asp-for="Credentials.Username" class="form-control"/>
-            </div>
-            <span class="text-danger" asp-validation-for="Credentials.Username"></span>
-        </div>
+<link rel="stylesheet" href="~/css/Login.css"/>
 
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Credentials.Password"></label>
+@* <div class="container border" style="padding: 20px"> *@
+@*     <form method="post"> *@
+@*         <div class="text-danger" asp-validation-summary="ModelOnly"></div> *@
+@*         <div class="form-group row"> *@
+@*             <div class="col-2"> *@
+@*                 <label asp-for="Credentials.Username"></label> *@
+@*             </div> *@
+@*             <div class="col-5"> *@
+@*                 <input type="text" asp-for="Credentials.Username" class="form-control"/> *@
+@*             </div> *@
+@*             <span class="text-danger" asp-validation-for="Credentials.Username"></span> *@
+@*         </div> *@
+@* *@
+@*         <div class="form-group row"> *@
+@*             <div class="col-2"> *@
+@*                 <label asp-for="Credentials.Password"></label> *@
+@*             </div> *@
+@*             <div class="col-5"> *@
+@*                 <input type="password" asp-for="Credentials.Password" class="form-control"/> *@
+@*             </div> *@
+@*             <span class="text-danger" asp-validation-for="Credentials.Password"></span> *@
+@*         </div> *@
+@*         <div class="form-group row"> *@
+@*             <div class="col-2"> *@
+@*                 <input type="submit" class="btn btn-primary" value="Login"/> *@
+@*             </div> *@
+@*         </div> *@
+@*     </form> *@
+@* </div> *@
+
+<div class="login-background container-fluid">
+    <div class="row register-row"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="">
+                <div class="logo-big text-center">
+                    <img src="~/photos/Group 1.png" alt="logo"/>
+                </div>
+                <form method="post">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <div class="col">
+                            <input asp-for="Credentials.Username" type="text" class="form-control" id="input-login" placeholder="Login"/>
+                            <span asp-validation-for="Credentials.Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col">
+                            <input asp-for="Credentials.Password" type="text" class="form-control" id="input-password" placeholder="Hasło"/>
+                            <span asp-validation-for="Credentials.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Zaloguj" class="btn btn-primary button-login"/>
+                    </div>
+                    <div class="back-to-register text-center">
+                        <a asp-page="Register" id="to-register">Stwórz nowe konto</a>
+                    </div>
+                </form>
             </div>
-            <div class="col-5">
-                <input type="password" asp-for="Credentials.Password" class="form-control"/>
-            </div>
-            <span class="text-danger" asp-validation-for="Credentials.Password"></span>
         </div>
-        <div class="form-group row">
-            <div class="col-2">
-                <input type="submit" class="btn btn-primary" value="Login"/>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>
