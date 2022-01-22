@@ -23,7 +23,10 @@
 
     <ItemGroup>
       <Folder Include="Pages\Booklets" />
-      <Folder Include="Pages\Users" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\css\Register.css" />
     </ItemGroup>
 
 </Project>

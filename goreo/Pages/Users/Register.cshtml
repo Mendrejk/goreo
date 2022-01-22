@@ -6,61 +6,76 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <div class="logo-big">
-            <img src="~/photos/Group 1.png" alt="logo"/>
-        </div>
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="User.Email" type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Email"/>
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="User.Username" type="email" class="form-control" id="input-nick" aria-describedby="emailHelp" placeholder="Nick"/>
-                <span asp-validation-for="User.Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="User.Password" type="password" class="form-control" id="input-password" placeholder="Hasło">
-                <span asp-validation-for="User.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="select-photo">Zdjęcie</label>
-                <input asp-for="User.ProfileImage" type="file" class="form-control-file" id="select-photo">
-                <span asp-validation-for="User.ProfileImage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="User.FirstName" type="email" class="form-control" id="input-name" aria-describedby="emailHelp" placeholder="Imię"/>
-                <span asp-validation-for="User.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="User.Surname" type="email" class="form-control" id="input-surname" aria-describedby="emailHelp" placeholder="Nazwisko"/>
-                <span asp-validation-for="User.Surname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input asp-for="User.CityOfResidence" type="email" class="form-control" id="input-home" aria-describedby="emailHelp" placeholder="Miejscowość zamieszkania"/>
-                <span asp-validation-for="User.CityOfResidence" class="text-danger"></span>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">Czy jest przodownikiem turystyki górskiej PTTK</label>
-                <input class="form-check-input" asp-for="User.IsLeader" type="checkbox" value="" id="check-yes">
-                <label class="form-check-label" for="check-yes"> Tak </label>
-                <input class="form-check-input" asp-for="User.IsLeader" type="checkbox" value="" id="check-no">
-                <label class="form-check-label" for="check-no"> Nie </label>
-            </div>
-            <div class="form-group">
-                <input asp-for="User.LeaderIdNo" type="email" class="form-control" id="input-number" aria-describedby="emailHelp" placeholder="Numer legitymacji"/>
-                <span asp-validation-for="User.LeaderIdNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Stwórz" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<link rel="stylesheet" href="~/css/Register.css"/>
 
-<div>
-    <a asp-page="Index">Wróć do logowania</a>
+<div class="register-background container-fluid">
+    <div class="row register-row"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="">
+                <div class="logo-big text-center">
+                    <img src="~/photos/Group 1.png" alt="logo"/>
+                </div>
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="col">
+                            <input asp-for="User.Email" type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Email"/>
+                            <span asp-validation-for="User.Email" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="User.Username" type="text" class="form-control" id="input-nick" aria-describedby="emailHelp" placeholder="Nick"/>
+                            <span asp-validation-for="User.Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <input asp-for="User.Password" type="password" class="form-control" id="input-password" placeholder="Hasło">
+                            <span asp-validation-for="User.Password" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="User.FirstName" type="text" class="form-control" id="input-name" aria-describedby="emailHelp" placeholder="Imię"/>
+                            <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <input asp-for="User.Surname" type="text" class="form-control" id="input-surname" aria-describedby="emailHelp" placeholder="Nazwisko"/>
+                            <span asp-validation-for="User.Surname" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="User.CityOfResidence" type="text" class="form-control" id="input-home" aria-describedby="emailHelp" placeholder="Miejscowość zamieszkania"/>
+                            <span asp-validation-for="User.CityOfResidence" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-photo" for="select-photo">Zdjęcie</label>
+                        <input asp-for="User.ProfileImage" type="file" class="form-control-file select-button" id="select-photo">
+                        <span asp-validation-for="User.ProfileImage" class="text-danger"></span>
+                    </div>
+                    <div>
+                        @* <label class="form-check-label label-check check-padding">Czy jest przodownikiem turystyki górskiej PTTK</label> *@
+                        <div class="custom-control custom-switch register-switch">
+                            <input asp-for="User.IsLeader" type="checkbox" class="custom-control-input" id="customSwitch1">
+                            <label class="custom-control-label label-check" for="customSwitch1">Czy jest przodownikiem turystyki górskiej PTTK</label>
+                            @* <input class="form-check-input" asp-for="User.IsLeader" type="radio" value="" id="check-yes"> *@
+                            @* <label class="form-check-label label-yes check-padding" for="check-yes"> Tak </label> *@
+                            @* <input class="form-check-input" asp-for="User.IsLeader" type="radio" value="" id="check-no"> *@
+                            @* <label class="form-check-label label-no" for="check-no"> Nie </label> *@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="User.LeaderIdNo" type="text" class="form-control" id="input-number" aria-describedby="emailHelp" placeholder="Numer legitymacji"/>
+                        <span asp-validation-for="User.LeaderIdNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Stwórz" class="btn btn-primary button-create"/>
+                    </div>
+                    <div class="back-to-login text-center">
+                        <a asp-page="Login" id="to-login">Wróć do logowania</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
