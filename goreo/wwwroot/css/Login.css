@@ -44,8 +44,15 @@
 .button-login {
     background-color: #347D75;
     color: #ECCC9E;
+    border: solid 0.125rem #347D75;
     border-radius: 2rem;
     width: 15rem;
+}
+
+.button-login:hover {
+    background-color: #ECCC9E;
+    color: #347D75;
+    border: solid 0.125rem #347D75;
 }
 
 .back-to-register {
@@ -53,5 +60,10 @@
 }
 
 #to-register {
+    color: #C6C6C6;
+}
+
+#forgotten-password {
+    margin-left: 20%;
     color: #C6C6C6;
 }

@@ -77,6 +77,13 @@
     color: #ECCC9E;
     border-radius: 2rem;
     width: 15rem;
+    border: solid 0.125rem #347D75;
+}
+
+.button-create:hover {
+    background-color: #ECCC9E;
+    color: #347D75;
+    border: solid 0.125rem #347D75;
 }
 
 #input-number {
