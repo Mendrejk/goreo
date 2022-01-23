@@ -45,6 +45,13 @@ namespace goreo
                 _ => Roles.User
             };
 
+        public string GetRoleForFrontend() =>
+            DetermineRole() switch
+            {
+                Roles.Leader => "Przodownik",
+                _ => "Turysta"
+            };
+
         public static class Roles
         {
             public const string Administrator = "Administrator";
