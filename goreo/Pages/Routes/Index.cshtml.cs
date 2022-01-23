@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace goreo.Pages.Routes
 {
-    public class Index : PageModel
+    [Authorize(Policy = "MustBeUser")]
+    public class IndexModel : PageModel
     {
         public void OnGet()
         {
-            
         }
     }
 }
