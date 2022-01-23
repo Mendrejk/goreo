@@ -77,8 +77,10 @@
 
 <script>
     window.onload = function() {
+        $('#input-number').prop('disabled', true)
+
         $("#customSwitch1").change(function() {
-           $('#input-number').prop('disabled', !this.checked) 
+           $('#input-number').prop('disabled', !this.checked)
         });
     };
 </script>
