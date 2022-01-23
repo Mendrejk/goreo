@@ -13,6 +13,7 @@ namespace goreo
         }
 
         public string Name { get; set; }
+        public string Number { get; set; }
 
         public virtual ICollection<LocationsMountainGroup> LocationsMountainGroups { get; set; }
     }

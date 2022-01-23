@@ -94,12 +94,14 @@ CREATE TABLE IF NOT EXISTS booklets_badges
     CONSTRAINT booklets_badges_pkey PRIMARY KEY (booklet_id, badge_id)
 );
 
-
 ALTER TABLE routes
-ADD COLUMN name VARCHAR(255) UNIQUE NOT NULL DEFAULT '';
+    ADD COLUMN name VARCHAR(255) UNIQUE NOT NULL DEFAULT '';
 
 ALTER TABLE sections
-ADD COLUMN order_number INT NOT NULL DEFAULT 0;
+    ADD COLUMN order_number INT NOT NULL DEFAULT 0;
+
+ALTER TABLE mountain_groups
+    ADD COLUMN number VARCHAR(5) UNIQUE NOT NULL DEFAULT 0;
 
 -- drop table booklets_badges;
 -- drop table badges;
