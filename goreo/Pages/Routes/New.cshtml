@@ -15,10 +15,6 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Route.UserId" class="control-label"></label>
-                <select asp-for="Route.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="Route.Name" class="control-label"></label>
                 <input asp-for="Route.Name" class="form-control" />
                 <span asp-validation-for="Route.Name" class="text-danger"></span>

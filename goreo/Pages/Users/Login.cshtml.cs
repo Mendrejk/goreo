@@ -39,7 +39,7 @@ namespace goreo.Pages.Users
                 return role switch
                 {
                     null => RedirectToPage("/Users/Logout"),
-                    "User" => RedirectToPage("/Routes/Index"),
+                    "User" or "Leader" => RedirectToPage("/Routes/Index"),
                     _ => RedirectToPage("/Users/Index")
                 };
             }

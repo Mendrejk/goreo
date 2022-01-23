@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace goreo.Pages.Routes
 {
-    [Authorize(Policy = "MustBeUser")]
+    [Authorize(Policy = "MustBeUserOrLeader")]
     public class IndexModel : PageModel
     {
         private readonly goreo.postgresContext _context;
