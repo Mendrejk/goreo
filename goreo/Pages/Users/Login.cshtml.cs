@@ -88,7 +88,7 @@ namespace goreo.Pages.Users
             {
                 return RedirectToPage("/Routes/Index");
             }
-            
+
             return RedirectToPage("/Users/Index");
         }
 
