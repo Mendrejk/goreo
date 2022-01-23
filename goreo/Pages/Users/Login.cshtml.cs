@@ -19,8 +19,15 @@ namespace goreo.Pages.Users
             _context = context;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            var isLoggedIn = HttpContext.User.Identity is { IsAuthenticated: true };
+            if (isLoggedIn)
+            {
+                return RedirectToPage("/Users/Index");
+            }
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
