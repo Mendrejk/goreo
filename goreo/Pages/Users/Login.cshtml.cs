@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -19,14 +20,39 @@ namespace goreo.Pages.Users
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             var isLoggedIn = HttpContext.User.Identity is { IsAuthenticated: true };
+
+            // ReSharper disable once InvertIf
             if (isLoggedIn)
             {
+                var userClaims = ((ClaimsIdentity)User.Identity)?.Claims;
+                if (userClaims == null)
+                {
+                    return RedirectToPage("/Users/Logout");
+                }
+
+                var username = userClaims.Where(claim =>
+                    claim.Type == ClaimTypes.Name).Select(claim => claim.Value).SingleOrDefault();
+
+                var user = await _context.Users.FirstOrDefaultAsync(user => user.Username == username);
+
+                if (user == null)
+                {
+                    return RedirectToPage("/Users/Logout");
+                }
+
+                // ReSharper disable once ConvertIfStatementToReturnStatement
+                if (user.DetermineRole() == "User")
+                {
+                    return RedirectToPage("/Routes/Index");
+                }
+
                 return RedirectToPage("/Users/Index");
             }
 
+            // default path - render the login page
             return Page();
         }
 
@@ -52,10 +78,12 @@ namespace goreo.Pages.Users
                 return Page();
             }
 
+            var userRole = user.DetermineRole();
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.DetermineRole())
+                new Claim(ClaimTypes.Role, userRole)
             };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -63,6 +91,12 @@ namespace goreo.Pages.Users
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity));
 
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if (userRole == "User")
+            {
+                return RedirectToPage("/Routes/Index");
+            }
+            
             return RedirectToPage("/Users/Index");
         }
 
