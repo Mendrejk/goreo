@@ -195,11 +195,19 @@ namespace goreo
             {
                 entity.ToTable("routes");
 
+                entity.HasIndex(e => e.Name, "routes_name_key")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .HasColumnName("name");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Routes)
