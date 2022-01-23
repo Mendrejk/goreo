@@ -44,10 +44,10 @@ namespace goreo.Pages.Users
             {
                 var fileName = Path.GetFileNameWithoutExtension(Registrant.ImageFile.FileName);
                 var extension = Path.GetExtension(Registrant.ImageFile.FileName);
-                
+
                 fileName += DateTime.Now.ToString("yymmssfff") + extension;
                 Registrant.User.ProfileImage = fileName;
-                
+
                 var path = Path.Combine(wwwRootPath + "/profilePictures", fileName);
 
                 await using var fileStream = new FileStream(path, FileMode.Create);
@@ -56,6 +56,14 @@ namespace goreo.Pages.Users
 
             // Insert the new user into the db
             _context.Users.Add(Registrant.User);
+
+            // insert the user's booklet into the db
+            if (!Registrant.User.IsAdmin)
+            {
+                var booklet = new Booklet { User = Registrant.User };
+                _context.Booklets.Add(booklet);
+            }
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
@@ -64,8 +72,7 @@ namespace goreo.Pages.Users
 
     public class Registrant
     {
-        [Required]
-        public User User { get; set; }
+        [Required] public User User { get; set; }
         public IFormFile ImageFile { get; set; }
     }
 }
