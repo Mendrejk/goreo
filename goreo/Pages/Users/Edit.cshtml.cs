@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using goreo;
+using Microsoft.AspNetCore.Authorization;
 
 namespace goreo.Pages.Users
 {
+    [Authorize(Policy = "MustBeAdmin")]
     public class EditModel : PageModel
     {
         private readonly goreo.postgresContext _context;
