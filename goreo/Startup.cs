@@ -38,6 +38,12 @@ namespace goreo
                     }
                 );
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MustBeAdmin",
+                    policy => policy.RequireClaim(ClaimTypes.Role, User.Roles.Administrator));
+            });
+
             // route to the login page by default
             services.AddMvc().AddRazorPagesOptions(options =>
                 {
