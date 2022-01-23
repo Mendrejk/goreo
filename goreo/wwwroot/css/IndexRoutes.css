@@ -1,0 +1,20 @@
+﻿.routes-container {
+    font-family: "Century Gothic";
+}
+
+.banner {
+    background-color: #347D75;
+    height: 4.5rem;
+    padding: 0.5rem 0.5rem;
+}
+
+.logo {
+    height: 3.5rem;
+    float: left;
+}
+
+.site-name {
+    color: #ECCC9E;
+    float: left;
+    font-size: 2rem;
+}
