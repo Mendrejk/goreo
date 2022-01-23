@@ -15,85 +15,82 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].Email)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].Username)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.Username)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].Password)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.Password)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].ProfileImage)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.ProfileImage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].FirstName)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].Surname)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].CityOfResidence)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.CityOfResidence)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].IsLeader)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.IsLeader)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].LeaderIdNo)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.LeaderIdNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].IsAdmin)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.IsAdmin)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].Booklet)
+                @Html.DisplayNameFor(model => model.UsersWithImagePath[0].User.Booklet)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.User) {
+@foreach (var userWithImagePath in Model.UsersWithImagePath) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.Username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.Password)
             </td>
             <td class="col-sm-10">
-                <img src="@(
-                              item.ProfileImage == null
-                                  ? "~/photos/DefaultProfileImage.png"
-                                  : "~/profilePictures/" + item.ProfileImage)"
+                <img src="@(userWithImagePath.ImagePath)"
                      asp-append-version="true" width="150px" height="150px" alt=""/>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Surname)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.Surname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CityOfResidence)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.CityOfResidence)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsLeader)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.IsLeader)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LeaderIdNo)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.LeaderIdNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsAdmin)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.IsAdmin)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Booklet.Id)
+                @Html.DisplayFor(modelItem => userWithImagePath.User.Booklet.Id)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@userWithImagePath.User.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@userWithImagePath.User.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@userWithImagePath.User.Id">Delete</a>
             </td>
         </tr>
 }
