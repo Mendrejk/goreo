@@ -1,37 +1,193 @@
 ﻿.routes-container {
     font-family: "Century Gothic", serif;
-    height: 100vm;
 }
 
 .banner {
     background-color: #347D75;
     height: 4.5rem;
     padding: 0.5rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .logo {
     height: 3.5rem;
     float: left;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .site-name {
     color: #ECCC9E;
-    text-align: center;
     font-size: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
-.logout {
-    color: #ECCC9E;
-    float: right;
-    font-size: 2rem;
+.data-and-role {
+    color: #424242;
+    float: left;
+    margin: 0 0.5rem;
 }
 
-#new-route {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+.personal-data {
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-#new-route-button {
-    background-color: darkorange;
-    margin: auto;
+.role {
+    display: flex;
+    justify-content: center;
+}
+
+.user-photo {
+    float: left;
+}
+
+.data-button {
+    cursor: pointer;
+}
+
+.dropdown-logout {
+    position: relative;
+    display: inline-block;
+    height: 4.5rem;
+}
+
+.logout-content {
+    top: 4rem;
+    display: none;
+    position: absolute;
+    background-color: #424242;
+    min-width: 15rem;
+    box-shadow: 2px 4px 4px #cccccc;
+    z-index: 1;
+}
+
+.logout-content a{
+    color: #DC9C56;
+    padding: 0.5rem;
+    text-decoration: none;
+    display: block;
+}
+
+.logout-content a:hover {
+    color: #B87748;
+}
+
+.dropdown-logout:hover .data-button {
+    background-color: #1e4945;
+}
+
+.dropdown-logout:hover .logout-content {
+    display: block;
+}
+
+.arrow-back {
+    height: 1rem;
+    display: flex;
+    margin: 0.5rem;
+}
+
+.back-to-menu-text {
+    font-size: 1rem;
+    color: #347D75;
+    display: flex;
+    align-items: center;
+}
+
+.back-to-menu {
+    display: flex;
+    margin: 0.5rem;
+}
+
+.add-route-button {
+    color: #424242;
+    background-color: #DC9C56;
+    border: solid 0.15rem #B87748;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    padding: 0.1rem 7rem;
+    margin: 0.25rem 0;
+}
+
+.add-route {
+    display: flex;
+    justify-content: center;
+}
+
+.labels {
+    color: #DC9C56;
+    font-size: 1.3rem;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.5rem;
+}
+
+.label-route {
+    display: flex;
+    flex: 0 0 60%;
+    margin: 0 6rem;
+}
+
+.label-date {
+    display: flex;
+    flex: 0 0 10%;
+}
+
+.label-approval {
+    display: flex;
+    flex: 0 0 10%;
+}
+
+.label-badge {
+    display: flex;
+    flex: 0 0 10%;
+}
+
+.label-line {
+    border-color: #DC9C56;
+    width: 90%;
+    size: 0.2rem;
+    margin-top: -0.2rem;
+    box-shadow: 2px 4px 4px #cccccc;
+}
+
+.routes {
+    color: #424242;
+    font-size: 1.1rem;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.2rem;
+}
+
+.routes-route {
+    display: flex;
+    flex: 0 0 60%;
+    margin: 0 6.2rem;
+}
+
+.routes-date {
+    display: flex;
+    flex: 0 0 10%;
+}
+
+.routes-approval {
+    display: flex;
+    flex: 0 0 10%;
+}
+
+.routes-badge {
+    display: flex;
+    flex: 0 0 10%;
+}
+
+.shadow-routes {
+    border-color: #ffffff;
+    width: 90%;
+    size: 0.2rem;
+    margin-top: -0.2rem;
+    box-shadow: 2px 4px 4px #cccccc;
 }

@@ -8,44 +8,80 @@
 
 <link rel="stylesheet" href="~/css/IndexRoutes.css"/>
 
-<div class="routes-container container-fluid">
-    <div class="row banner">
-        <div class="small-logo col-md">
+<div class="routes-container">
+    <div class="banner">
+        <div class="small-logo">
             <img src="~/photos/Group 2.png" class="logo" alt="logo"/>
         </div>
-        <div class="site-name col-md">
+        <div class="site-name">
             Przebyte trasy
         </div>
-        <div class="col-md">
-            <a asp-page="/Users/Logout" id="logout" class="logout">Wyloguj</a>
+        <div class="dropdown-logout">
+            <div class="data-button">
+                <div class="data-and-role">
+                    <div class="personal-data">
+                        @Html.DisplayFor(model => model.Routes[0].User.FirstName)
+                        @Html.DisplayFor(model => model.Routes[0].User.Surname)
+                    </div>
+                    <div class="role">
+                        @(Model.Routes[0].User.GetRoleForFrontend())
+                    </div>
+                </div>
+                <div class="user-photo">
+                    <img src="@(
+                                  Model.Routes[0].User.ProfileImage == null
+                                      ? "~/photos/DefaultProfileImage.png"
+                                      : "~/profilePictures/" + Model.Routes[0].User.ProfileImage)"
+                         asp-append-version="true" alt="" width="50px" height="50px"/>
+                </div>
+            </div>
+            <div class="logout-content">
+                <a asp-page="/Users/Logout">Wyloguj</a>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md" id="new-route">
-            <a asp-page="/Routes/New">
-                <button type="button" class="btn btn-lg btn-block col-md-4 rounded-pill" id="new-route-button">Dodaj trasę</button>
-            </a>
+    <div class="back-to-menu">
+        <div class="arrow-back">
+            <img src="~/photos/Icon awesome-arrow-left.png"/>
+        </div>
+        <div class="back-to-menu-text">
+            Wróć do menu
         </div>
     </div>
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Routes[0].Name)
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var route in Model.Routes)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => route.Name)
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
+    <div class="add-route">
+        <button class="add-route-button">Dodaj trasę</button>
     </div>
+    <div class="labels">
+        <div class="label-route">
+            Trasa
+        </div>
+        <div class="label-date">
+            Data
+        </div>
+        <div class="label-approval">
+            Zatwierdzenie
+        </div>
+        <div class="label-badge">
+            Odznaka
+        </div>
+    </div>
+    <hr class="label-line"/>
+    @foreach (var route in Model.Routes)
+        {
+            <div class="routes">
+                <div class="routes-route">
+                    @Html.DisplayFor(modelItem => route.Name)
+                </div>
+                <div class="routes-date">
+                    foo
+                </div>
+                <div class="routes-approval">
+                    bar
+                </div>
+                <div class="routes-badge">
+                    foobar
+                </div>
+            </div>
+            <hr class="shadow-routes"/>
+        }
 </div>
