@@ -184,6 +184,13 @@ namespace goreo
                 entity.HasKey(e => e.Name)
                     .HasName("mountain_groups_pkey");
 
+                entity.HasIndex(e => e.Number, "mountain_groups_number_key")
+                    .IsUnique();
+
+                entity.Property(e => e.Number)
+                    .IsRequired()
+                    .HasColumnName("number");
+
                 entity.ToTable("mountain_groups");
 
                 entity.Property(e => e.Name)
