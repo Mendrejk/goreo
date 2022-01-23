@@ -20,18 +20,18 @@
             <div class="data-button">
                 <div class="data-and-role">
                     <div class="personal-data">
-                        @Html.DisplayFor(model => model.Routes[0].User.FirstName)
-                        @Html.DisplayFor(model => model.Routes[0].User.Surname)
+                        @Html.DisplayFor(model => model.IndexedUser.FirstName)
+                        @Html.DisplayFor(model => model.IndexedUser.Surname)
                     </div>
                     <div class="role">
-                        @(Model.Routes[0].User.GetRoleForFrontend())
+                        @(Model.IndexedUser.GetRoleForFrontend())
                     </div>
                 </div>
                 <div class="user-photo">
                     <img src="@(
-                                  Model.Routes[0].User.ProfileImage == null
+                                  Model.IndexedUser.ProfileImage == null
                                       ? "~/photos/DefaultProfileImage.png"
-                                      : "~/profilePictures/" + Model.Routes[0].User.ProfileImage)"
+                                      : "~/profilePictures/" + Model.IndexedUser.ProfileImage)"
                          asp-append-version="true" alt="" width="50px" height="50px"/>
                 </div>
             </div>
@@ -68,7 +68,7 @@
         </div>
     </div>
     <hr class="label-line"/>
-    @foreach (var route in Model.Routes)
+    @foreach (var route in Model.IndexedUser.Routes)
         {
             <div class="routes">
                 <div class="routes-route">

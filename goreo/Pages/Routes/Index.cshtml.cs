@@ -19,7 +19,7 @@ namespace goreo.Pages.Routes
             _context = context;
         }
 
-        public IList<Route> Routes { get; set; }
+        public User IndexedUser { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -39,7 +39,7 @@ namespace goreo.Pages.Routes
                 return RedirectToPage("/Users/Logout");
             }
 
-            Routes = user.Routes.ToList();
+            IndexedUser = user;
 
             return Page();
         }
