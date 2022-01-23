@@ -98,6 +98,9 @@ CREATE TABLE IF NOT EXISTS booklets_badges
 ALTER TABLE routes
 ADD COLUMN name VARCHAR(255) UNIQUE NOT NULL DEFAULT '';
 
+ALTER TABLE sections
+ADD COLUMN order_number INT NOT NULL DEFAULT 0;
+
 -- drop table booklets_badges;
 -- drop table badges;
 -- drop TABLE locations_mountain_groups;

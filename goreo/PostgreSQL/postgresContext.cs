@@ -245,6 +245,10 @@ namespace goreo
 
                 entity.Property(e => e.RouteId).HasColumnName("route_id");
 
+                entity.Property(e => e.OrderNumber)
+                    .IsRequired()
+                    .HasColumnName("order_number");
+
                 entity.HasOne(d => d.LocationFromNavigation)
                     .WithMany(p => p.SectionLocationFromNavigations)
                     .HasForeignKey(d => d.LocationFrom)

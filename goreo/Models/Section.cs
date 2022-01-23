@@ -17,6 +17,7 @@ namespace goreo
         public int LocationFrom { get; set; }
         public int LocationTo { get; set; }
         public int RouteId { get; set; }
+        public int OrderNumber { get; set; }
 
         public virtual Location LocationFromNavigation { get; set; }
         public virtual Location LocationToNavigation { get; set; }
