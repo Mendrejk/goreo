@@ -1,5 +1,6 @@
 ﻿.routes-container {
-    font-family: "Century Gothic";
+    font-family: "Century Gothic", serif;
+    height: 100vm;
 }
 
 .banner {
@@ -15,6 +16,21 @@
 
 .site-name {
     color: #ECCC9E;
-    float: left;
+    text-align: center;
     font-size: 2rem;
+}
+
+.logout {
+    color: #ECCC9E;
+    float: right;
+    font-size: 2rem;
+}
+
+#new-route {
+    padding-top: 1rem;
+}
+
+#new-route-button {
+    background-color: darkorange;
+    margin: auto;
 }
