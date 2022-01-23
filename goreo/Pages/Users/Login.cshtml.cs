@@ -20,7 +20,7 @@ namespace goreo.Pages.Users
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
             var isLoggedIn = HttpContext.User.Identity is { IsAuthenticated: true };
 
@@ -33,23 +33,15 @@ namespace goreo.Pages.Users
                     return RedirectToPage("/Users/Logout");
                 }
 
-                var username = userClaims.Where(claim =>
-                    claim.Type == ClaimTypes.Name).Select(claim => claim.Value).SingleOrDefault();
+                var role = userClaims.Where(claim =>
+                    claim.Type == ClaimTypes.Role).Select(claim => claim.Value).SingleOrDefault();
 
-                var user = await _context.Users.FirstOrDefaultAsync(user => user.Username == username);
-
-                if (user == null)
+                return role switch
                 {
-                    return RedirectToPage("/Users/Logout");
-                }
-
-                // ReSharper disable once ConvertIfStatementToReturnStatement
-                if (user.DetermineRole() == "User")
-                {
-                    return RedirectToPage("/Routes/Index");
-                }
-
-                return RedirectToPage("/Users/Index");
+                    null => RedirectToPage("/Users/Logout"),
+                    "User" => RedirectToPage("/Routes/Index"),
+                    _ => RedirectToPage("/Users/Index")
+                };
             }
 
             // default path - render the login page
