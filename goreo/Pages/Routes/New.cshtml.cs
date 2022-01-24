@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace goreo.Pages.Routes
@@ -28,6 +30,22 @@ namespace goreo.Pages.Routes
             }
 
             Route = new Route { User = user };
+
+            var sectionsForFrontend = _context.Sections
+                .Include(section => section.LocationFromNavigation)
+                .ThenInclude(locationFromNavigation => locationFromNavigation.LocationsMountainGroups)
+                .ThenInclude(locationsMountainGroup => locationsMountainGroup.MountainGroupNameNavigation)
+                .Include(section => section.LocationToNavigation)
+                .Select(section =>
+                    new SectionForFrontend
+                    {
+                        Section = section,
+                        Display =
+                            $"{section.LocationFromNavigation.LocationsMountainGroups.First().MountainGroupNameNavigation.Number}: {section.LocationFromNavigation.Name} - {section.LocationToNavigation.Name}"
+                    }
+                );
+
+            ViewData["Sections"] = new SelectList(sectionsForFrontend, "Section.Id", "Display");
 
             return Page();
         }
@@ -79,5 +97,11 @@ namespace goreo.Pages.Routes
 
             return user;
         }
+    }
+
+    public class SectionForFrontend
+    {
+        public Section Section { get; set; }
+        public string Display  { get; set; }
     }
 }
