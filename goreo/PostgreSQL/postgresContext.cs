@@ -109,6 +109,10 @@ namespace goreo
 
                 entity.Property(e => e.EntryDate).HasColumnName("entry_date");
 
+                entity.Property(e => e.isConfirmed)
+                    .IsRequired()
+                    .HasColumnName("is_confirmed");
+
                 entity.HasOne(d => d.Booklet)
                     .WithMany(p => p.BookletsRoutes)
                     .HasForeignKey(d => d.BookletId)
