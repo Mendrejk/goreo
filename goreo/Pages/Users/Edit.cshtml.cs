@@ -35,7 +35,8 @@ namespace goreo.Pages.Users
             {
                 return NotFound();
             }
-           ViewData["BookletId"] = new SelectList(_context.Booklets, "Id", "Id");
+
+            ViewData["BookletId"] = new SelectList(_context.Booklets, "Id", "Id");
             return Page();
         }
 

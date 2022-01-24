@@ -1,0 +1,48 @@
+@page
+@model goreo.Pages.Routes.PendingModel
+
+@{
+    ViewData["Title"] = "Pending";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Pending</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookletsRoutes[0].Route)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookletsRoutes[0].EntryDate)
+        </th>
+        <th>
+            Użytkownik
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.BookletsRoutes)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Route.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booklet.User.FirstName)
+                @Html.DisplayFor(modelItem => item.Booklet.User.Surname)
+            </td>
+            <td>
+                <a asp-page="./Accept" asp-route-id="@item.Route.Id">Zatwierdź</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
