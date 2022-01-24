@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -41,20 +42,48 @@ namespace goreo.Pages.Routes
                     {
                         Section = section,
                         Display =
-                            $"{section.LocationFromNavigation.LocationsMountainGroups.First().MountainGroupNameNavigation.Number}:"
+                            $"{section.LocationFromNavigation.LocationsMountainGroups.First().MountainGroupNameNavigation.Number}: "
                             + $"{section.LocationFromNavigation.Name} - {section.LocationToNavigation.Name}"
                     }
                 );
 
             ViewData["Sections"] = new SelectList(sectionsForFrontend, "Section.Id", "Display");
 
+            ViewData["SelectedSections"] = HttpContext.Session.Keys
+                .Where(key => key.Length > 7 && key[..7] == "section")
+                .Select(key =>
+                    (key[7..],
+                        HttpContext.Session.GetInt32(key))
+                )
+                .OrderBy(tuple => tuple.Item1)
+                .Select(tuple =>
+                    sectionsForFrontend.FirstOrDefault(section => section.Section.Id == tuple.Item2)?.Display)
+                .ToList();
+
             return Page();
+        }
+
+        [BindProperty] public Section Section { get; set; }
+        public IActionResult OnPostSection()
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+
+            var sectionNo = HttpContext.Session.GetInt32("no")?? 0;
+
+            HttpContext.Session.SetInt32($"section{sectionNo}", Section.Id);
+
+            HttpContext.Session.SetInt32("no", sectionNo + 1);
+
+            return RedirectToPage("/Routes/New");
         }
 
         [BindProperty] public NewRouteData NewRouteData { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostRouteAsync()
         {
             if (!ModelState.IsValid)
             {

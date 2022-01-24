@@ -38,6 +38,8 @@ namespace goreo
                     }
                 );
 
+            services.AddSession();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("MustBeAdmin",
@@ -76,6 +78,8 @@ namespace goreo
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();

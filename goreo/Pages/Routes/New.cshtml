@@ -48,7 +48,7 @@
             Wróć do menu
         </div>
     </div>
-    <form class="container-body">
+    <form class="container-body" method="post">
         <div class="left-container">
             <div class="calendar-label">
                 Data odbycia wycieczki
@@ -65,19 +65,21 @@
                 <label class="custom-control-label label-check" for="customSwitch2">Czy dodać trasę do odznaki?</label>
             </div>
         </div>
-        <div class="right-container">
-            @foreach (var section in Model.NewRouteData.SelectedSections)
-            {
-                <div class="section">
-                    @Html.DisplayFor(modelItem => section)
+        <form method="post">
+            <div class="right-container">
+                @foreach (var selectedSection in ViewBag.SelectedSections)
+                {
+                    <div class="section">
+                        @selectedSection
+                    </div>
+                }
+                <div class="add-section">
+                    <div class="form-group select-section">
+                        <select asp-for="Section.Id" class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.Sections"></select>
+                        <button type="submit" asp-page-handler="section" asp-route-id="1">test</button>
+                    </div>
                 </div>
-            }
-            <div class="form-group select-section">
-                <select class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.Sections"></select>
             </div>
-            <div class="add-section">
-                <button class="add-section-button">Dodaj kolejny odcinek</button>
-            </div>
-        </div>
+        </form>
     </form>
 </div>
