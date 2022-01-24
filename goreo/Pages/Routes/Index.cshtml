@@ -87,7 +87,7 @@
                             .isConfirmed;
                     }
                     @(isConfirmed != null && (bool)isConfirmed
-                        ? "Tak"
+                        ? @Html.Label("Tak", "Tak", new {@class="data-yes"})
                         : "Nie")
                 </div>
                 <div class="routes-badge">
