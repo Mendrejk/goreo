@@ -21,17 +21,7 @@ namespace goreo.Pages.Routes
 
         public async Task<IActionResult> OnGet()
         {
-            var userClaims = ((ClaimsIdentity)User.Identity)?.Claims;
-            if (userClaims == null)
-            {
-                return RedirectToPage("/Users/Logout");
-            }
-
-            var username = userClaims.Where(claim =>
-                claim.Type == ClaimTypes.Name).Select(claim => claim.Value).SingleOrDefault();
-
-            var user = await _context.Users.Include(user => user.Routes)
-                .FirstOrDefaultAsync(user => user.Username == username);
+            var user = GetUserFromClaims().Result;
             if (user == null)
             {
                 return RedirectToPage("/Users/Logout");
@@ -52,6 +42,15 @@ namespace goreo.Pages.Routes
                 return Page();
             }
 
+            var user = GetUserFromClaims().Result;
+            if (user == null)
+            {
+                return RedirectToPage("/Users/Logout");
+            }
+
+            Route.User = user;
+            Route.UserId = user.Id;
+
             _context.Routes.Add(Route);
 
             // add the route to the user's booklet
@@ -62,6 +61,23 @@ namespace goreo.Pages.Routes
             await _context.SaveChangesAsync();
 
             return RedirectToPage("/Routes/Index");
+        }
+
+        private async Task<User> GetUserFromClaims()
+        {
+            var userClaims = ((ClaimsIdentity)User.Identity)?.Claims;
+            if (userClaims == null)
+            {
+                return null;
+            }
+
+            var username = userClaims.Where(claim =>
+                claim.Type == ClaimTypes.Name).Select(claim => claim.Value).SingleOrDefault();
+
+            var user = await _context.Users.Include(user => user.Routes)
+                .FirstOrDefaultAsync(user => user.Username == username);
+
+            return user;
         }
     }
 }
