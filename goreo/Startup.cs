@@ -44,6 +44,8 @@ namespace goreo
                     policy => policy.RequireClaim(ClaimTypes.Role, User.Roles.Administrator));
                 options.AddPolicy("MustBeUserOrLeader",
                     policy => policy.RequireClaim(ClaimTypes.Role, User.Roles.User, User.Roles.Leader));
+                options.AddPolicy("MustBeLeader",
+                    policy => policy.RequireClaim(ClaimTypes.Role, User.Roles.Leader));
             });
 
             // route to the login page by default
