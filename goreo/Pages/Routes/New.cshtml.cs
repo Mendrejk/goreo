@@ -29,6 +29,8 @@ namespace goreo.Pages.Routes
                 return RedirectToPage("/Users/Logout");
             }
 
+            ViewData["User"] = user;
+
             var sectionsForFrontend = _context.Sections
                 .Include(section => section.LocationFromNavigation)
                 .ThenInclude(locationFromNavigation => locationFromNavigation.LocationsMountainGroups)
