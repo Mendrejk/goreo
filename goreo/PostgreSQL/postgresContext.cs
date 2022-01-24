@@ -217,6 +217,8 @@ namespace goreo
                 
                 entity.Property(e => e.OrderNumber).HasColumnName("order_number");
 
+                entity.Property(e => e.IsCounted).HasColumnName("is_counted");
+
                 entity.HasOne(d => d.Route)
                     .WithMany(p => p.RoutesSections)
                     .HasForeignKey(d => d.RouteId)
@@ -268,8 +270,6 @@ namespace goreo
                     .HasColumnName("description");
 
                 entity.Property(e => e.Distance).HasColumnName("distance");
-
-                entity.Property(e => e.IsCounted).HasColumnName("is_counted");
 
                 entity.Property(e => e.LocationFrom).HasColumnName("location_from");
 

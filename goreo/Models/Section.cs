@@ -16,7 +16,6 @@ namespace goreo
         public int Distance { get; set; }
         public int Points { get; set; }
         public int Approach { get; set; }
-        public bool IsCounted { get; set; }
         public string Description { get; set; }
         public string MountainTrail { get; set; }
         public int LocationFrom { get; set; }
