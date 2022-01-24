@@ -25,6 +25,7 @@ namespace goreo
         public virtual DbSet<LocationsMountainGroup> LocationsMountainGroups { get; set; }
         public virtual DbSet<MountainGroup> MountainGroups { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
+        public virtual DbSet<RoutesSection> RoutesSections { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
@@ -184,18 +185,42 @@ namespace goreo
                 entity.HasKey(e => e.Name)
                     .HasName("mountain_groups_pkey");
 
+                entity.ToTable("mountain_groups");
+
                 entity.HasIndex(e => e.Number, "mountain_groups_number_key")
                     .IsUnique();
-
-                entity.Property(e => e.Number)
-                    .IsRequired()
-                    .HasColumnName("number");
-
-                entity.ToTable("mountain_groups");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
                     .HasColumnName("name");
+
+                entity.Property(e => e.Number)
+                    .IsRequired()
+                    .HasMaxLength(5)
+                    .HasColumnName("number");
+            });
+
+            modelBuilder.Entity<RoutesSection>(entity =>
+            {
+                entity.HasKey(e => new { e.RouteId, e.SectionId })
+                    .HasName("routes_sections_pkey");
+
+                entity.ToTable("routes_sections");
+
+                entity.Property(e => e.RouteId).HasColumnName("route_id");
+
+                entity.Property(e => e.SectionId).HasColumnName("section_id");
+
+                entity.HasOne(d => d.Route)
+                    .WithMany(p => p.RoutesSections)
+                    .HasForeignKey(d => d.RouteId)
+                    .HasConstraintName("routes_sections_route_id_fkey");
+
+                entity.HasOne(d => d.Section)
+                    .WithMany(p => p.RoutesSections)
+                    .HasForeignKey(d => d.SectionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("routes_sections_section_id_fkey");
             });
 
             modelBuilder.Entity<Route>(entity =>
@@ -209,12 +234,12 @@ namespace goreo
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(255)
                     .HasColumnName("name");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Routes)
@@ -248,13 +273,9 @@ namespace goreo
                     .HasMaxLength(255)
                     .HasColumnName("mountain_trail");
 
+                entity.Property(e => e.OrderNumber).HasColumnName("order_number");
+                
                 entity.Property(e => e.Points).HasColumnName("points");
-
-                entity.Property(e => e.RouteId).HasColumnName("route_id");
-
-                entity.Property(e => e.OrderNumber)
-                    .IsRequired()
-                    .HasColumnName("order_number");
 
                 entity.HasOne(d => d.LocationFromNavigation)
                     .WithMany(p => p.SectionLocationFromNavigations)
@@ -267,11 +288,6 @@ namespace goreo
                     .HasForeignKey(d => d.LocationTo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("sections_location_to_fkey");
-
-                entity.HasOne(d => d.Route)
-                    .WithMany(p => p.Sections)
-                    .HasForeignKey(d => d.RouteId)
-                    .HasConstraintName("sections_route_id_fkey");
             });
 
             modelBuilder.Entity<User>(entity =>

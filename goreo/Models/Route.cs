@@ -10,7 +10,7 @@ namespace goreo
         public Route()
         {
             BookletsRoutes = new HashSet<BookletsRoute>();
-            Sections = new HashSet<Section>();
+            RoutesSections = new HashSet<RoutesSection>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace goreo
 
         public virtual User User { get; set; }
         public virtual ICollection<BookletsRoute> BookletsRoutes { get; set; }
-        public virtual ICollection<Section> Sections { get; set; }
+        public virtual ICollection<RoutesSection> RoutesSections { get; set; }
     }
 }

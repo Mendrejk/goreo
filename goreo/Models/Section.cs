@@ -7,6 +7,11 @@ namespace goreo
 {
     public partial class Section
     {
+        public Section()
+        {
+            RoutesSections = new HashSet<RoutesSection>();
+        }
+        
         public int Id { get; set; }
         public int Distance { get; set; }
         public int Points { get; set; }
@@ -16,11 +21,10 @@ namespace goreo
         public string MountainTrail { get; set; }
         public int LocationFrom { get; set; }
         public int LocationTo { get; set; }
-        public int RouteId { get; set; }
         public int OrderNumber { get; set; }
 
         public virtual Location LocationFromNavigation { get; set; }
         public virtual Location LocationToNavigation { get; set; }
-        public virtual Route Route { get; set; }
+        public virtual ICollection<RoutesSection> RoutesSections { get; set; }
     }
 }
