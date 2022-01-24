@@ -1,0 +1,174 @@
+﻿.new-container {
+    font-family: "Century Gothic", serif;
+}
+
+.banner {
+    background-color: #347D75;
+    height: 4.5rem;
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 3.5rem;
+    float: left;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.site-name {
+    color: #ECCC9E;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.data-and-role {
+    color: #424242;
+    float: left;
+    margin: 0 0.5rem;
+}
+
+.personal-data {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.role {
+    display: flex;
+    justify-content: center;
+}
+
+.user-photo {
+    float: left;
+}
+
+.data-button {
+    cursor: pointer;
+}
+
+.dropdown-logout {
+    position: relative;
+    display: inline-block;
+    height: 4.5rem;
+}
+
+.logout-content {
+    top: 4rem;
+    display: none;
+    position: absolute;
+    background-color: #424242;
+    min-width: 15rem;
+    box-shadow: 2px 4px 4px #cccccc;
+    z-index: 1;
+}
+
+.logout-content a{
+    color: #DC9C56;
+    padding: 0.5rem;
+    text-decoration: none;
+    display: block;
+}
+
+.logout-content a:hover {
+    color: #B87748;
+}
+
+.dropdown-logout:hover .data-button {
+    background-color: #1e4945;
+}
+
+.dropdown-logout:hover .logout-content {
+    display: block;
+}
+
+.arrow-back {
+    height: 1rem;
+    display: flex;
+    margin: 0.5rem;
+}
+
+.back-to-menu-text {
+    font-size: 1rem;
+    color: #347D75;
+    display: flex;
+    align-items: center;
+}
+
+.back-to-menu {
+    display: flex;
+    margin: 0.5rem;
+}
+
+.calendar-label {
+    color: #B87748;
+    font-size: 1.3rem;
+    margin:  0.5rem 1rem;
+}
+
+.date-input {
+    margin: 0 1rem;
+}
+
+.date-picker-route::-webkit-clear-button {
+    display: none;
+}
+
+.date-picker-route::-webkit-inner-spin-button {
+    display: none;
+}
+
+.date-picker-route::-webkit-calendar-picker-indicator {
+    color: #2c3e50;
+}
+
+.date-picker-route {
+    color: #95a5a6;
+    font-family: "Century Gothic", serif;
+    font-size: 1.2rem;
+    border: 0.1rem solid #ecf0f1;
+    background:#ecf0f1;
+    padding:0.3rem;
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+.with-leader-switch {
+    color: #B87748;
+    font-size: 1.3rem;
+    margin:  0.5rem 1rem;
+}
+
+.container-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.select-section {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 10rem;
+}
+
+.right-container {
+    width: 70%;
+}
+
+.add-section {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.add-section-button {
+    width: 20rem;
+    height: 2.5rem;
+    background-color: #DC9C56;
+    color: #424242;
+    border: solid 0.2rem #B87748;
+    border-radius: 2rem;
+    font-size: 1.25rem;
+}

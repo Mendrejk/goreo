@@ -6,30 +6,78 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>New</h1>
+<link rel="stylesheet" href="~/css/NewRoute.css"/>
 
-<h4>Route</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Route.Name" class="control-label"></label>
-                <input asp-for="Route.Name" class="form-control" />
-                <span asp-validation-for="Route.Name" class="text-danger"></span>
+<div class="new-container">
+    <div class="banner">
+        <div class="small-logo">
+            <img src="~/photos/Group 2.png" class="logo" alt="logo"/>
+        </div>
+        <div class="site-name">
+            Nowa trasa
+        </div>
+        <div class="dropdown-logout">
+            <div class="data-button">
+                <div class="data-and-role">
+                    <div class="personal-data">
+                        @ViewBag.User.FirstName
+                        @ViewBag.User.Surname
+                    </div>
+                    <div class="role">
+                        @ViewBag.User.GetRoleForFrontend()
+                    </div>
+                </div>
+                <div class="user-photo">
+                    <img src="@(
+                                  ViewBag.User.ProfileImage == null
+                                      ? "~/photos/DefaultProfileImage.png"
+                                      : "~/profilePictures/" + ViewBag.User.ProfileImage)"
+                         asp-append-version="true" alt="" width="50px" height="50px"/>
+                </div>
             </div>
-            <div class="form-group">
-                <select asp-for="Route.Id" class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.Sections"></select>
+            <div class="logout-content">
+                <a asp-page="/Users/Logout">Wyloguj</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
+    <div class="back-to-menu">
+        <div class="arrow-back">
+            <img src="~/photos/Icon awesome-arrow-left.png"/>
+        </div>
+        <div class="back-to-menu-text">
+            Wróć do menu
+        </div>
+    </div>
+    <form class="container-body">
+        <div class="left-container">
+            <div class="calendar-label">
+                Data odbycia wycieczki
+            </div>
+            <div class="date-input">
+                <input type="date" class="date-picker-route"/>
+            </div>
+            <div class="custom-control custom-switch with-leader-switch">
+                <input asp-for="NewRouteData.WasLeaderPresent" type="checkbox" class="custom-control-input" id="customSwitch1">
+                <label class="custom-control-label label-check" for="customSwitch1">Czy przodownik był obecny?</label>
+            </div>
+            <div class="custom-control custom-switch with-leader-switch">
+                <input asp-for="NewRouteData.IsCounted" type="checkbox" class="custom-control-input" id="customSwitch2">
+                <label class="custom-control-label label-check" for="customSwitch2">Czy dodać trasę do odznaki?</label>
+            </div>
+        </div>
+        <div class="right-container">
+            @foreach (var section in Model.NewRouteData.SelectedSections)
+            {
+                <div class="section">
+                    @Html.DisplayFor(modelItem => section)
+                </div>
+            }
+            <div class="form-group select-section">
+                <select class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.Sections"></select>
+            </div>
+            <div class="add-section">
+                <button class="add-section-button">Dodaj kolejny odcinek</button>
+            </div>
+        </div>
+    </form>
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
