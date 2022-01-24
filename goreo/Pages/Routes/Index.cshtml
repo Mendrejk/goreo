@@ -81,7 +81,14 @@
                         .ToShortDateString())
                 </div>
                 <div class="routes-approval">
-                    bar
+                    @{
+                        var isConfirmed = route.BookletsRoutes
+                            .FirstOrDefault(bookletsRoute => bookletsRoute.Booklet == Model.IndexedUser.Booklet)?
+                            .isConfirmed;
+                    }
+                    @(isConfirmed != null && (bool)isConfirmed
+                        ? "Tak"
+                        : "Nie")
                 </div>
                 <div class="routes-badge">
                     foobar
