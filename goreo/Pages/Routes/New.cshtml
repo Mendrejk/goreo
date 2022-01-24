@@ -20,6 +20,9 @@
                 <span asp-validation-for="Route.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <select asp-for="Route.Id" class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.Sections"></select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
