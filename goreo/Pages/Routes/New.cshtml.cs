@@ -37,7 +37,7 @@ namespace goreo.Pages.Routes
                 return RedirectToPage("/Users/Logout");
             }
 
-            Route.User = user;
+            Route = new Route { User = user };
 
             return Page();
         }
