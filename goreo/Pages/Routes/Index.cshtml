@@ -75,7 +75,10 @@
                     @Html.DisplayFor(modelItem => route.Name)
                 </div>
                 <div class="routes-date">
-                    foo
+                    @(route.BookletsRoutes
+                        .FirstOrDefault(bookletsRoute => bookletsRoute.Booklet == Model.IndexedUser.Booklet)?
+                        .EntryDate
+                        .ToShortDateString())
                 </div>
                 <div class="routes-approval">
                     bar

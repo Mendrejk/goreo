@@ -32,7 +32,10 @@ namespace goreo.Pages.Routes
             var username = userClaims.Where(claim =>
                 claim.Type == ClaimTypes.Name).Select(claim => claim.Value).SingleOrDefault();
 
-            var user = await _context.Users.Include(user => user.Routes)
+            var user = await _context.Users
+                .Include(user => user.Booklet)
+                .Include(user => user.Routes)
+                .ThenInclude(route => route.BookletsRoutes)
                 .FirstOrDefaultAsync(user => user.Username == username);
             if (user == null)
             {
