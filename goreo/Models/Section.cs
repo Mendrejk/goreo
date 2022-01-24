@@ -21,7 +21,6 @@ namespace goreo
         public string MountainTrail { get; set; }
         public int LocationFrom { get; set; }
         public int LocationTo { get; set; }
-        public int OrderNumber { get; set; }
 
         public virtual Location LocationFromNavigation { get; set; }
         public virtual Location LocationToNavigation { get; set; }

@@ -214,6 +214,8 @@ namespace goreo
                 entity.Property(e => e.RouteId).HasColumnName("route_id");
 
                 entity.Property(e => e.SectionId).HasColumnName("section_id");
+                
+                entity.Property(e => e.OrderNumber).HasColumnName("order_number");
 
                 entity.HasOne(d => d.Route)
                     .WithMany(p => p.RoutesSections)
@@ -277,8 +279,6 @@ namespace goreo
                     .HasMaxLength(255)
                     .HasColumnName("mountain_trail");
 
-                entity.Property(e => e.OrderNumber).HasColumnName("order_number");
-                
                 entity.Property(e => e.Points).HasColumnName("points");
 
                 entity.HasOne(d => d.LocationFromNavigation)
