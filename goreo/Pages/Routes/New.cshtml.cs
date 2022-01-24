@@ -49,7 +49,7 @@ namespace goreo.Pages.Routes
 
             ViewData["Sections"] = new SelectList(sectionsForFrontend, "Section.Id", "Display");
 
-            ViewData["SelectedSections"] = HttpContext.Session.Keys
+            var selectedSections = HttpContext.Session.Keys
                 .Where(key => key.Length > 7 && key[..7] == "section")
                 .Select(key =>
                     (key[7..],
@@ -57,13 +57,21 @@ namespace goreo.Pages.Routes
                 )
                 .OrderBy(tuple => tuple.Item1)
                 .Select(tuple =>
-                    sectionsForFrontend.FirstOrDefault(section => section.Section.Id == tuple.Item2)?.Display)
+                    sectionsForFrontend.FirstOrDefault(section => section.Section.Id == tuple.Item2))
                 .ToList();
+
+            ViewData["SelectedSections"] = selectedSections.Select(section => section?.Display);
+
+            ViewData["mountainGroupNo"] = selectedSections.FirstOrDefault()?.Section.LocationFromNavigation
+                .LocationsMountainGroups.First().MountainGroupNameNavigation.Number;
+
+            ViewData["points"] = CountPointsFromSections(selectedSections.Select(section => section?.Section));
 
             return Page();
         }
 
         [BindProperty] public Section Section { get; set; }
+
         public IActionResult OnPostSection()
         {
             if (!ModelState.IsValid)
@@ -71,7 +79,7 @@ namespace goreo.Pages.Routes
                 return NotFound();
             }
 
-            var sectionNo = HttpContext.Session.GetInt32("no")?? 0;
+            var sectionNo = HttpContext.Session.GetInt32("no") ?? 0;
 
             HttpContext.Session.SetInt32($"section{sectionNo}", Section.Id);
 
@@ -96,22 +104,33 @@ namespace goreo.Pages.Routes
                 return RedirectToPage("/Users/Logout");
             }
 
-            if (NewRouteData.SelectedSections.Count == 0)
+            var selectedSections = HttpContext.Session.Keys
+                .Where(key => key.Length > 7 && key[..7] == "section")
+                .Select(key =>
+                    (key[7..],
+                        _context.Sections.FirstOrDefault(section => section.Id == HttpContext.Session.GetInt32(key)))
+                )
+                .OrderBy(tuple => tuple.Item1)
+                .Select(tuple =>
+                    tuple.Item2)
+                .ToList();
+
+            if (selectedSections.Count == 0)
             {
                 // todo (ViewData?)
-                return Page();
+                return NotFound();
             }
-            
-            if (!AreSectionsValid(NewRouteData.SelectedSections))
+
+            if (!AreSectionsValid(selectedSections))
             {
                 // todo (ViewData?)
-                return Page();
+                return NotFound();
             }
 
-            var routeName = $"{NewRouteData.SelectedSections.First().LocationFromNavigation.Name}"
-                            + $" - {NewRouteData.SelectedSections.Last().LocationToNavigation.Name}";
+            var routeName = $"{selectedSections.First().LocationFromNavigation.Name}"
+                            + $" - {selectedSections.Last().LocationToNavigation.Name}";
 
-            var route = new Route { UserId = user.Id, Name = routeName};
+            var route = new Route { UserId = user.Id, Name = routeName };
             _context.Routes.Add(route);
 
             // add the route to the user's booklet
@@ -124,14 +143,15 @@ namespace goreo.Pages.Routes
 
             // add selectedSections to routes_sections
             var i = 0;
-            foreach (var section in NewRouteData.SelectedSections)
+            foreach (var section in selectedSections)
             {
                 _context.RoutesSections.Add(new RoutesSection
                     {
                         RouteId = route.Id,
                         SectionId = section.Id,
                         OrderNumber = i,
-                        IsCounted = NewRouteData.IsCounted // if route is not counted, then all sections should not be counted
+                        IsCounted = NewRouteData
+                            .IsCounted // if route is not counted, then all sections should not be counted
                     }
                 );
 
@@ -175,6 +195,11 @@ namespace goreo.Pages.Routes
                 }
             );
         }
+
+        private static int CountPointsFromSections(IEnumerable<Section> sections) =>
+            sections.GroupBy(section => section.Id)
+                .Select(grouping => grouping.First())
+                .Aggregate(0, (sum, section) => sum + section.Points);
     }
 
     public class SectionForFrontend
@@ -185,7 +210,6 @@ namespace goreo.Pages.Routes
 
     public class NewRouteData
     {
-        public List<Section> SelectedSections { get; set; }
         public DateTime RouteDate { get; set; }
         public bool WasLeaderPresent { get; set; }
         public bool IsCounted { get; set; }
