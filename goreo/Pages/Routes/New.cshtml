@@ -56,7 +56,15 @@
                     <input type="date" class="date-picker-route"/>
                 </div>
                 <div class="custom-control custom-switch with-leader-switch">
-                    <input asp-for="NewRouteData.WasLeaderPresent" type="checkbox" class="custom-control-input" id="customSwitch1">
+                    @if (ViewBag.User.GetRoleForFrontend() == "Przodownik")
+                    {
+                        <input asp-for="NewRouteData.WasLeaderPresent" type="checkbox" class="custom-control-input" id="customSwitch1" disabled>
+                    }
+                    else
+                    {
+                        <input asp-for="NewRouteData.WasLeaderPresent" type="checkbox" class="custom-control-input" id="customSwitch1">
+                    }
+
                     <label class="custom-control-label label-check" for="customSwitch1">Czy przodownik był obecny?</label>
                 </div>
                 <div class="custom-control custom-switch with-leader-switch">
