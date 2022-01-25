@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Westwind.AspNetCore.LiveReload;
 
 namespace goreo
@@ -37,6 +38,12 @@ namespace goreo
                         options.AccessDeniedPath = "/Users/Login";
                     }
                 );
+
+            services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "Goreo API", Version = "v1.0" });
+                }
+            );
 
             services.AddSession();
 
@@ -84,6 +91,8 @@ namespace goreo
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
