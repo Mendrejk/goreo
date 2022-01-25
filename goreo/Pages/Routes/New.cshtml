@@ -29,9 +29,7 @@
                 </div>
                 <div class="user-photo">
                     <img src="@(
-                                  ViewBag.User.ProfileImage == null
-                                      ? "~/photos/DefaultProfileImage.png"
-                                      : "~/profilePictures/" + ViewBag.User.ProfileImage)"
+                                  ViewBag.User.ProfileImage == null ? "~/photos/DefaultProfileImage.png" : "~/profilePictures/" + ViewBag.User.ProfileImage)"
                          asp-append-version="true" alt="" width="50px" height="50px"/>
                 </div>
             </div>
@@ -48,24 +46,24 @@
             Wróć do menu
         </div>
     </div>
-    <form class="container-body" method="post">
-        <div class="left-container">
-            <div class="calendar-label">
-                Data odbycia wycieczki
+    <form method="post">
+        <div class="container-body">
+            <div class="left-container">
+                <div class="calendar-label">
+                    Data odbycia wycieczki
+                </div>
+                <div class="date-input">
+                    <input type="date" class="date-picker-route"/>
+                </div>
+                <div class="custom-control custom-switch with-leader-switch">
+                    <input asp-for="NewRouteData.WasLeaderPresent" type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label label-check" for="customSwitch1">Czy przodownik był obecny?</label>
+                </div>
+                <div class="custom-control custom-switch with-leader-switch">
+                    <input asp-for="NewRouteData.IsCounted" type="checkbox" class="custom-control-input" id="customSwitch2">
+                    <label class="custom-control-label label-check" for="customSwitch2">Czy dodać trasę do odznaki?</label>
+                </div>
             </div>
-            <div class="date-input">
-                <input type="date" class="date-picker-route"/>
-            </div>
-            <div class="custom-control custom-switch with-leader-switch">
-                <input asp-for="NewRouteData.WasLeaderPresent" type="checkbox" class="custom-control-input" id="customSwitch1">
-                <label class="custom-control-label label-check" for="customSwitch1">Czy przodownik był obecny?</label>
-            </div>
-            <div class="custom-control custom-switch with-leader-switch">
-                <input asp-for="NewRouteData.IsCounted" type="checkbox" class="custom-control-input" id="customSwitch2">
-                <label class="custom-control-label label-check" for="customSwitch2">Czy dodać trasę do odznaki?</label>
-            </div>
-        </div>
-        <form method="post">
             <div class="right-container">
                 @foreach (var selectedSection in ViewBag.SelectedSections)
                 {
@@ -76,10 +74,25 @@
                 <div class="add-section">
                     <div class="form-group select-section">
                         <select asp-for="Section.Id" class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.Sections"></select>
-                        <button type="submit" asp-page-handler="section" asp-route-id="1">test</button>
                     </div>
                 </div>
+                <div class="button-for-section">
+                    <button type="submit" class="add-section-button" asp-page-handler="section" asp-route-id="1">Dodaj kolejny odcinek</button>
+                </div>
             </div>
-        </form>
+            <div class="container-page-end">
+                <div class="labels">
+                    <div class="label-mountain-group">
+                        Numer grupy górskiej: @ViewBag.mountainGroupNo
+                    </div>
+                    <div class="label-points">
+                        Suma punktów: @ViewBag.points
+                    </div>
+                </div>
+                <div class="save-route">
+                    <button type="submit" class="save-route-button" asp-page-handler="section" asp-route-id="1">Zapisz trasę</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
