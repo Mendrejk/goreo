@@ -40,13 +40,21 @@
             </div>
         </div>
     </div>
-    <div class="back-to-menu">
-        <div class="arrow-back">
-            <img src="~/photos/Icon awesome-arrow-left.png"/>
+    <div class="links">
+        <div class="back-to-menu">
+            <div class="arrow-back">
+                <img src="~/photos/Icon awesome-arrow-left.png"/>
+            </div>
+            <div class="back-to-menu-text">
+                Wróć do menu
+            </div>
         </div>
-        <div class="back-to-menu-text">
-            Wróć do menu
-        </div>
+        @if (Model.IndexedUser.GetRoleForFrontend() == "Przodownik")
+        {
+            <a asp-page="/Routes/Pending" class="to-pending">
+                Do zatwierdzeń
+            </a>
+        }
     </div>
     <div class="add-route">
         <a asp-page="/Routes/New">

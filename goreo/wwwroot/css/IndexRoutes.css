@@ -83,6 +83,17 @@
     display: block;
 }
 
+.links {
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+}
+
+.back-to-menu {
+    display: flex;
+    margin: 0.5rem;
+}
+
 .arrow-back {
     height: 1rem;
     display: flex;
@@ -92,13 +103,32 @@
 .back-to-menu-text {
     font-size: 1rem;
     color: #347D75;
+    margin-left: 0.5rem;
     display: flex;
-    align-items: center;
+    align-self: center;
 }
 
-.back-to-menu {
+.to-pending {
     display: flex;
-    margin: 0.5rem;
+    font-size: 1rem;
+    color: #347D75;
+    margin: 1rem 1rem 0 1rem;
+}
+
+.to-pending:link {
+    text-decoration: none;
+}
+
+.to-pending:visited {
+    text-decoration: none;
+}
+
+.to-pending:hover {
+    text-decoration: none;
+}
+
+.to-pending:active {
+    text-decoration: none;
 }
 
 .add-route-button {
