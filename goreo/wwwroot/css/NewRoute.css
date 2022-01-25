@@ -101,6 +101,26 @@
     margin: 0.5rem;
 }
 
+.back-to-routes {
+    display: inline-block;
+}
+
+.back-to-routes:link {
+    text-decoration: none;
+}
+
+.back-to-routes:visited {
+    text-decoration: none;
+}
+
+.back-to-routes:hover {
+    text-decoration: none;
+}
+
+.back-to-routes:active {
+    text-decoration: none;
+}
+
 .calendar-label {
     color: #B87748;
     font-size: 1.3rem;
