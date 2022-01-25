@@ -47,7 +47,9 @@ namespace goreo.Pages.Routes
                     }
                 );
 
-            ViewData["Sections"] = new SelectList(sectionsForFrontend, "Section.Id", "Display");
+            ViewData["Sections"] = new SelectList(
+                sectionsForFrontend.OrderBy(section => section.Section.LocationFromNavigation.Name), "Section.Id",
+                "Display");
 
             var selectedSections = HttpContext.Session.Keys
                 .Where(key => key.Length > 7 && key[..7] == "section")
@@ -108,7 +110,9 @@ namespace goreo.Pages.Routes
                 .Where(key => key.Length > 7 && key[..7] == "section")
                 .Select(key =>
                     (key[7..],
-                        _context.Sections.FirstOrDefault(section => section.Id == HttpContext.Session.GetInt32(key)))
+                        _context.Sections.Include(section => section.LocationFromNavigation)
+                            .Include(section => section.LocationToNavigation).FirstOrDefault(section =>
+                                section.Id == HttpContext.Session.GetInt32(key)))
                 )
                 .OrderBy(tuple => tuple.Item1)
                 .Select(tuple =>
@@ -130,15 +134,18 @@ namespace goreo.Pages.Routes
             var routeName = $"{selectedSections.First().LocationFromNavigation.Name}"
                             + $" - {selectedSections.Last().LocationToNavigation.Name}";
 
-            var route = new Route { UserId = user.Id, Name = routeName };
-            _context.Routes.Add(route);
+            _context.Routes.Add(new Route { UserId = user.Id, Name = routeName });
+
+            await _context.SaveChangesAsync();
+
+            var routeFromDb = await _context.Routes.FirstOrDefaultAsync(dbRoute => dbRoute.Name == routeName);
 
             // add the route to the user's booklet
             var isConfirmed = NewRouteData.WasLeaderPresent;
 
             var booklet = await _context.Booklets.FirstOrDefaultAsync(booklet => booklet.Id == user.BookletId);
             var bookletsRoute = new BookletsRoute
-                { EntryDate = NewRouteData.RouteDate, Booklet = booklet, Route = route, isConfirmed = isConfirmed };
+                { EntryDate = NewRouteData.RouteDate, Booklet = booklet, RouteId = routeFromDb.Id, isConfirmed = isConfirmed };
             _context.BookletsRoutes.Add(bookletsRoute);
 
             // add selectedSections to routes_sections
@@ -147,7 +154,7 @@ namespace goreo.Pages.Routes
             {
                 _context.RoutesSections.Add(new RoutesSection
                     {
-                        RouteId = route.Id,
+                        RouteId = routeFromDb.Id,
                         SectionId = section.Id,
                         OrderNumber = i,
                         IsCounted = NewRouteData
